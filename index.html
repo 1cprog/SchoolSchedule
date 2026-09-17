@@ -660,9 +660,9 @@
             title: "Школски дан II-1"
         }
     };
-    let lang = "ru";
+    let lang = "sr";
     try {
-        lang = localStorage.getItem("lang") || "ru"
+        lang = localStorage.getItem("lang") || "sr"
     } catch (e) {
     }
     const U = () => UI[lang], tr = s => lang === "sr" ? (SR[s] || s) : s;
@@ -676,13 +676,13 @@
         document.documentElement.lang = l;
         document.title = U().title;
         document.querySelectorAll("[data-i]").forEach(el => el.textContent = U()[el.dataset.i]);
-        lru.setAttribute("aria-pressed", l === "ru");
         lsr.setAttribute("aria-pressed", l === "sr");
+        lru.setAttribute("aria-pressed", l === "ru");
         render()
     }
 
-    lru.onclick = () => setLang("ru");
     lsr.onclick = () => setLang("sr");
+    lru.onclick = () => setLang("ru");
 
     const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
     const parse = s => {
