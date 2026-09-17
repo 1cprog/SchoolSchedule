@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎒</text></svg>">
+    <title>Школьный день 2/1</title>
+    <style>* {
+        box-sizing: border-box
+    }
+
+    body {
+        margin: 0
+    }</style>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Nunito:wght@400;600;800&display=swap">
+    <style>
+        :root {
+            --bg: #F3F5FA;
+            --card: #FFFFFF;
+            --ink: #1C2440;
+            --mute: #646C88;
+            --line: #DDE2EE;
+            --s1: #E59A1F;
+            --s1b: #FFF1D9;
+            --s2: #5B4FCF;
+            --s2b: #ECEAFF;
+            --off: #23946A;
+            --offb: #DEF5EC;
+            --we: #EEF0F6
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #11142A;
+                --card: #1A1E38;
+                --ink: #EDEFFA;
+                --mute: #9AA1C0;
+                --line: #2C3257;
+                --s1: #F4B04A;
+                --s1b: #3A2E17;
+                --s2: #9A90FF;
+                --s2b: #28254F;
+                --off: #4CC99A;
+                --offb: #153A2F;
+                --we: #1E2240
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #11142A;
+            --card: #1A1E38;
+            --ink: #EDEFFA;
+            --mute: #9AA1C0;
+            --line: #2C3257;
+            --s1: #F4B04A;
+            --s1b: #3A2E17;
+            --s2: #9A90FF;
+            --s2b: #28254F;
+            --off: #4CC99A;
+            --offb: #153A2F;
+            --we: #1E2240
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font: 16px/1.5 Nunito, system-ui, sans-serif
+        }
+
+        .wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 24px 16px 48px;
+            display: grid;
+            gap: 20px
+        }
+
+        h1, .big {
+            font-family: Unbounded, Nunito, sans-serif;
+            margin: 0;
+            text-wrap: balance
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        button, input {
+            font: inherit;
+            color: var(--ink);
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 8px 14px;
+            cursor: pointer
+        }
+
+        button:focus-visible, input:focus-visible {
+            outline: 3px solid var(--s2);
+            outline-offset: 2px
+        }
+
+        .date {
+            font-size: 15px;
+            color: var(--mute);
+            text-transform: capitalize
+        }
+
+        .hero {
+            border-radius: 20px;
+            padding: 24px;
+            display: grid;
+            gap: 6px;
+            background: var(--hb);
+            border: 2px solid var(--hc)
+        }
+
+        .hero .big {
+            font-size: clamp(28px, 7vw, 44px);
+            color: var(--hc)
+        }
+
+        .hero .sub {
+            font-weight: 800;
+            font-size: 18px
+        }
+
+        .note {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-weight: 600;
+            margin-top: 6px
+        }
+
+        .lessons {
+            display: grid;
+            gap: 8px
+        }
+
+        .ls {
+            display: grid;
+            grid-template-columns:36px 110px 1fr;
+            gap: 12px;
+            align-items: center;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px 14px
+        }
+
+        .ls b {
+            font-family: Unbounded, sans-serif;
+            font-size: 18px;
+            color: var(--hc)
+        }
+
+        .ls .tm {
+            font-variant-numeric: tabular-nums;
+            color: var(--mute)
+        }
+
+        .ls .nm {
+            font-weight: 800
+        }
+
+        .ls.now {
+            border: 2px solid var(--hc);
+            background: var(--hb)
+        }
+
+        .ls.done {
+            opacity: .5
+        }
+
+        .brk {
+            font-size: 13px;
+            color: var(--mute);
+            padding-left: 62px
+        }
+
+        h2 {
+            font: 700 16px Unbounded, sans-serif;
+            margin: 8px 0 0
+        }
+
+        .cal {
+            display: grid;
+            grid-template-columns:repeat(7, 1fr);
+            gap: 4px
+        }
+
+        .cal div {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            cursor: pointer;
+            font-size: 14px
+        }
+
+        .cal .h {
+            aspect-ratio: auto;
+            color: var(--mute);
+            font-size: 12px;
+            cursor: default;
+            text-transform: uppercase;
+            letter-spacing: .05em
+        }
+
+        .c1 {
+            background: var(--s1b);
+            color: var(--s1)
+        }
+
+        .c2 {
+            background: var(--s2b);
+            color: var(--s2)
+        }
+
+        .co {
+            background: var(--offb);
+            color: var(--off)
+        }
+
+        .cw {
+            background: var(--we);
+            color: var(--mute)
+        }
+
+        .cal .sel {
+            outline: 3px solid var(--ink)
+        }
+
+        .cal .tod {
+            text-decoration: underline 2px
+        }
+
+        .legend {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--mute)
+        }
+
+        .legend span::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+            margin-right: 6px;
+            vertical-align: -1px;
+            background: var(--c)
+        }
+
+        .lang {
+            margin-left: auto;
+            display: flex;
+            gap: 0
+        }
+
+        .lang button {
+            border-radius: 0;
+            padding: 8px 12px
+        }
+
+        .lang button:first-child {
+            border-radius: 10px 0 0 10px
+        }
+
+        .lang button:last-child {
+            border-radius: 0 10px 10px 0;
+            border-left: 0
+        }
+
+        .lang button[aria-pressed="true"] {
+            background: var(--ink);
+            color: var(--bg);
+            border-color: var(--ink)
+        }
+
+        .mh {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        @media (max-width: 480px) {
+            .ls {
+                grid-template-columns:28px 1fr
+            }
+
+            .ls .tm {
+                grid-column: 2
+            }
+
+            .ls .nm {
+                grid-column: 2
+            }
+
+            .brk {
+                padding-left: 40px
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="nav">
+    <button id="prev" aria-label="Предыдущий день">←</button>
+    <button id="today" data-i="today">Сегодня</button>
+    <button id="next" aria-label="Следующий день">→</button>
+    <input type="date" id="pick" min="2026-09-01" max="2027-08-31">
+    <span class="lang" role="group" aria-label="Язык / Језик">
+      <button id="lsr" data-l="sr">SR</button>
+      <button id="lru" data-l="ru">RU</button>
+    </span>
+    </header>
+    <div class="date" id="dateLbl"></div>
+    <section class="hero" id="hero"></section>
+    <section class="lessons" id="lessons"></section>
+    <section>
+        <div class="mh">
+            <button id="mp" aria-label="Предыдущий месяц">‹</button>
+            <h2 id="mt"></h2>
+            <button id="mn" aria-label="Следующий месяц">›</button>
+        </div>
+        <div class="cal" id="cal"></div>
+        <div class="legend" style="margin-top:10px">
+          <span style="--c:var(--s1)" data-i="lg1">1 смена (утро)</span>
+          <span style="--c:var(--s2)" data-i="lg2">2 смена (после обеда)</span><span style="--c:var(--off)" data-i="lg3">каникулы / праздник</span>
+          <span style="--c:var(--mute)" data-i="lg4">выходной</span>
+        </div>
+    </section>
+    <p class="date" style="text-transform:none" data-i="foot">ОШ «Олга Милошевић», 2/1 (II-1), 2026/2027. Большая перемена — после 2-го урока. Дни открытых дверей: четверг, 4-й урок.</p>
+</div>
+<script>
+    const DATA = {
+        "days": {
+            "2026-09-01": {"t": "s", "s": 2, "wd": 1},
+            "2026-09-02": {"t": "s", "s": 2, "wd": 2},
+            "2026-09-03": {"t": "s", "s": 2, "wd": 3},
+            "2026-09-04": {"t": "s", "s": 2, "wd": 4},
+            "2026-09-07": {"t": "s", "s": 2, "wd": 0},
+            "2026-09-08": {"t": "s", "s": 2, "wd": 1},
+            "2026-09-09": {"t": "s", "s": 2, "wd": 2},
+            "2026-09-10": {"t": "s", "s": 2, "wd": 3},
+            "2026-09-11": {"t": "s", "s": 2, "wd": 4},
+            "2026-09-14": {"t": "s", "s": 1, "wd": 0},
+            "2026-09-15": {"t": "s", "s": 1, "wd": 1},
+            "2026-09-16": {"t": "s", "s": 1, "wd": 2},
+            "2026-09-17": {"t": "s", "s": 1, "wd": 3},
+            "2026-09-18": {"t": "s", "s": 1, "wd": 4},
+            "2026-09-21": {"t": "s", "s": 1, "wd": 0},
+            "2026-09-22": {"t": "s", "s": 1, "wd": 1},
+            "2026-09-23": {"t": "s", "s": 1, "wd": 2},
+            "2026-09-24": {"t": "s", "s": 1, "wd": 3},
+            "2026-09-25": {"t": "s", "s": 1, "wd": 4},
+            "2026-09-28": {"t": "s", "s": 2, "wd": 0},
+            "2026-09-29": {"t": "s", "s": 2, "wd": 1},
+            "2026-09-30": {"t": "s", "s": 2, "wd": 2},
+            "2026-10-01": {"t": "s", "s": 2, "wd": 3},
+            "2026-10-02": {"t": "s", "s": 2, "wd": 4},
+            "2026-10-05": {"t": "s", "s": 2, "wd": 0},
+            "2026-10-06": {"t": "s", "s": 2, "wd": 1},
+            "2026-10-07": {"t": "s", "s": 2, "wd": 2},
+            "2026-10-08": {"t": "s", "s": 2, "wd": 3},
+            "2026-10-09": {"t": "s", "s": 2, "wd": 4},
+            "2026-10-12": {"t": "s", "s": 1, "wd": 0},
+            "2026-10-13": {"t": "s", "s": 1, "wd": 1},
+            "2026-10-14": {"t": "s", "s": 1, "wd": 2},
+            "2026-10-15": {"t": "s", "s": 1, "wd": 3},
+            "2026-10-16": {"t": "s", "s": 1, "wd": 4},
+            "2026-10-19": {"t": "s", "s": 1, "wd": 0},
+            "2026-10-20": {"t": "s", "s": 1, "wd": 1},
+            "2026-10-21": {"t": "s", "s": 1, "wd": 2},
+            "2026-10-22": {"t": "s", "s": 1, "wd": 3},
+            "2026-10-23": {"t": "s", "s": 1, "wd": 4},
+            "2026-10-26": {"t": "s", "s": 2, "wd": 0},
+            "2026-10-27": {"t": "s", "s": 2, "wd": 1},
+            "2026-10-28": {"t": "s", "s": 2, "wd": 2},
+            "2026-10-29": {"t": "s", "s": 2, "wd": 3},
+            "2026-10-30": {"t": "s", "s": 2, "wd": 4},
+            "2026-11-02": {"t": "s", "s": 2, "wd": 0},
+            "2026-11-03": {"t": "s", "s": 2, "wd": 1},
+            "2026-11-04": {"t": "s", "s": 2, "wd": 2},
+            "2026-11-05": {"t": "s", "s": 2, "wd": 3},
+            "2026-11-06": {"t": "s", "s": 2, "wd": 4},
+            "2026-11-09": {"t": "s", "s": 1, "wd": 0},
+            "2026-11-10": {"t": "s", "s": 1, "wd": 4, "n": "Уроки по расписанию ПЯТНИЦЫ"},
+            "2026-11-11": {"t": "off", "n": "День перемирия (гос. праздник)"},
+            "2026-11-12": {"t": "off", "n": "Нерабочий день"},
+            "2026-11-13": {"t": "off", "n": "Нерабочий день"},
+            "2026-11-16": {"t": "s", "s": 1, "wd": 0},
+            "2026-11-17": {"t": "s", "s": 1, "wd": 1},
+            "2026-11-18": {"t": "s", "s": 1, "wd": 2},
+            "2026-11-19": {"t": "s", "s": 1, "wd": 3},
+            "2026-11-20": {"t": "s", "s": 1, "wd": 4},
+            "2026-11-23": {"t": "s", "s": 2, "wd": 0},
+            "2026-11-24": {"t": "s", "s": 2, "wd": 1},
+            "2026-11-25": {"t": "s", "s": 2, "wd": 2},
+            "2026-11-26": {"t": "s", "s": 2, "wd": 3},
+            "2026-11-27": {"t": "s", "s": 2, "wd": 4},
+            "2026-11-30": {"t": "s", "s": 2, "wd": 0},
+            "2026-12-01": {"t": "s", "s": 2, "wd": 1},
+            "2026-12-02": {"t": "s", "s": 2, "wd": 2},
+            "2026-12-03": {"t": "s", "s": 2, "wd": 3},
+            "2026-12-04": {"t": "s", "s": 2, "wd": 4},
+            "2026-12-07": {"t": "s", "s": 1, "wd": 0},
+            "2026-12-08": {"t": "s", "s": 1, "wd": 1},
+            "2026-12-09": {"t": "s", "s": 1, "wd": 2},
+            "2026-12-10": {"t": "s", "s": 1, "wd": 3},
+            "2026-12-11": {"t": "s", "s": 1, "wd": 4},
+            "2026-12-14": {"t": "s", "s": 1, "wd": 0},
+            "2026-12-15": {"t": "s", "s": 1, "wd": 1},
+            "2026-12-16": {"t": "s", "s": 1, "wd": 2},
+            "2026-12-17": {"t": "s", "s": 1, "wd": 3},
+            "2026-12-18": {"t": "s", "s": 1, "wd": 4},
+            "2026-12-21": {"t": "s", "s": 2, "wd": 0},
+            "2026-12-22": {"t": "s", "s": 2, "wd": 1},
+            "2026-12-23": {"t": "s", "s": 2, "wd": 2},
+            "2026-12-24": {"t": "s", "s": 2, "wd": 3},
+            "2026-12-25": {"t": "s", "s": 2, "wd": 4},
+            "2026-12-28": {"t": "s", "s": 2, "wd": 0},
+            "2026-12-29": {"t": "s", "s": 2, "wd": 1},
+            "2026-12-30": {"t": "s", "s": 2, "wd": 2},
+            "2026-12-31": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-01": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-04": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-05": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-06": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-07": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-08": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-11": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-12": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-13": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-14": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-15": {"t": "off", "n": "Зимние каникулы"},
+            "2027-01-18": {"t": "s", "s": 1, "wd": 0},
+            "2027-01-19": {"t": "s", "s": 1, "wd": 1},
+            "2027-01-20": {"t": "s", "s": 1, "wd": 2},
+            "2027-01-21": {"t": "s", "s": 1, "wd": 3},
+            "2027-01-22": {"t": "s", "s": 1, "wd": 4},
+            "2027-01-25": {"t": "s", "s": 1, "wd": 0},
+            "2027-01-26": {"t": "s", "s": 1, "wd": 1},
+            "2027-01-27": {"t": "off", "n": "Свети Сава — школьный праздник, уроков нет"},
+            "2027-01-28": {"t": "s", "s": 1, "wd": 3},
+            "2027-01-29": {"t": "s", "s": 1, "wd": 4},
+            "2027-02-01": {"t": "s", "s": 2, "wd": 0},
+            "2027-02-02": {"t": "s", "s": 2, "wd": 1},
+            "2027-02-03": {"t": "s", "s": 2, "wd": 2},
+            "2027-02-04": {"t": "s", "s": 2, "wd": 3},
+            "2027-02-05": {"t": "s", "s": 2, "wd": 4},
+            "2027-02-08": {"t": "s", "s": 2, "wd": 0},
+            "2027-02-09": {"t": "s", "s": 2, "wd": 1},
+            "2027-02-10": {"t": "s", "s": 2, "wd": 2},
+            "2027-02-11": {"t": "s", "s": 2, "wd": 3},
+            "2027-02-12": {"t": "s", "s": 2, "wd": 4},
+            "2027-02-15": {"t": "off", "n": "Сретенье (гос. праздник)"},
+            "2027-02-16": {"t": "off", "n": "Сретенье (гос. праздник)"},
+            "2027-02-17": {"t": "off", "n": "Зимние каникулы (2-я часть)"},
+            "2027-02-18": {"t": "off", "n": "Зимние каникулы (2-я часть)"},
+            "2027-02-19": {"t": "off", "n": "Зимние каникулы (2-я часть)"},
+            "2027-02-22": {"t": "s", "s": 1, "wd": 0},
+            "2027-02-23": {"t": "s", "s": 1, "wd": 1},
+            "2027-02-24": {"t": "s", "s": 1, "wd": 2},
+            "2027-02-25": {"t": "s", "s": 1, "wd": 3},
+            "2027-02-26": {"t": "s", "s": 1, "wd": 4},
+            "2027-03-01": {"t": "s", "s": 1, "wd": 0},
+            "2027-03-02": {"t": "s", "s": 1, "wd": 1},
+            "2027-03-03": {"t": "s", "s": 1, "wd": 2},
+            "2027-03-04": {"t": "s", "s": 1, "wd": 3},
+            "2027-03-05": {"t": "s", "s": 1, "wd": 4},
+            "2027-03-08": {"t": "s", "s": 2, "wd": 0},
+            "2027-03-09": {"t": "s", "s": 2, "wd": 1},
+            "2027-03-10": {"t": "s", "s": 2, "wd": 2},
+            "2027-03-11": {"t": "s", "s": 2, "wd": 3},
+            "2027-03-12": {"t": "s", "s": 2, "wd": 4},
+            "2027-03-15": {"t": "s", "s": 2, "wd": 0},
+            "2027-03-16": {"t": "s", "s": 2, "wd": 1},
+            "2027-03-17": {"t": "s", "s": 2, "wd": 2},
+            "2027-03-18": {"t": "s", "s": 2, "wd": 3},
+            "2027-03-19": {"t": "s", "s": 2, "wd": 4},
+            "2027-03-22": {"t": "s", "s": 1, "wd": 0},
+            "2027-03-23": {"t": "s", "s": 1, "wd": 1},
+            "2027-03-24": {"t": "s", "s": 1, "wd": 2},
+            "2027-03-25": {"t": "s", "s": 1, "wd": 3},
+            "2027-03-26": {"t": "s", "s": 1, "wd": 4},
+            "2027-03-29": {"t": "s", "s": 1, "wd": 0},
+            "2027-03-30": {"t": "s", "s": 1, "wd": 1},
+            "2027-03-31": {"t": "s", "s": 1, "wd": 2},
+            "2027-04-01": {"t": "s", "s": 1, "wd": 3},
+            "2027-04-02": {"t": "s", "s": 1, "wd": 4},
+            "2027-04-05": {"t": "s", "s": 2, "wd": 0},
+            "2027-04-06": {"t": "s", "s": 2, "wd": 1},
+            "2027-04-07": {"t": "s", "s": 2, "wd": 2},
+            "2027-04-08": {"t": "s", "s": 2, "wd": 3},
+            "2027-04-09": {"t": "s", "s": 2, "wd": 4},
+            "2027-04-12": {"t": "s", "s": 2, "wd": 0},
+            "2027-04-13": {"t": "s", "s": 2, "wd": 1},
+            "2027-04-14": {"t": "s", "s": 2, "wd": 2},
+            "2027-04-15": {"t": "s", "s": 2, "wd": 3},
+            "2027-04-16": {"t": "s", "s": 2, "wd": 4},
+            "2027-04-19": {"t": "s", "s": 1, "wd": 0},
+            "2027-04-20": {"t": "s", "s": 1, "wd": 1},
+            "2027-04-21": {"t": "s", "s": 1, "wd": 2},
+            "2027-04-22": {"t": "s", "s": 1, "wd": 3},
+            "2027-04-23": {"t": "s", "s": 1, "wd": 4},
+            "2027-04-26": {"t": "s", "s": 1, "wd": 0},
+            "2027-04-27": {"t": "s", "s": 1, "wd": 1},
+            "2027-04-28": {"t": "s", "s": 1, "wd": 2},
+            "2027-04-29": {"t": "s", "s": 1, "wd": 3},
+            "2027-04-30": {"t": "off", "n": "Великая пятница (Пасха)"},
+            "2027-05-03": {"t": "off", "n": "Пасхальный понедельник"},
+            "2027-05-04": {"t": "off", "n": "Праздник труда (нерабочий день)"},
+            "2027-05-05": {"t": "s", "s": 2, "wd": 2},
+            "2027-05-06": {"t": "s", "s": 2, "wd": 3},
+            "2027-05-07": {"t": "s", "s": 2, "wd": 4},
+            "2027-05-10": {"t": "s", "s": 2, "wd": 0},
+            "2027-05-11": {"t": "s", "s": 2, "wd": 1},
+            "2027-05-12": {"t": "s", "s": 2, "wd": 2},
+            "2027-05-13": {"t": "s", "s": 2, "wd": 3},
+            "2027-05-14": {"t": "s", "s": 2, "wd": 4},
+            "2027-05-17": {"t": "s", "s": 1, "wd": 0},
+            "2027-05-18": {"t": "s", "s": 1, "wd": 1},
+            "2027-05-19": {"t": "s", "s": 1, "wd": 2},
+            "2027-05-20": {"t": "s", "s": 1, "wd": 3},
+            "2027-05-21": {"t": "s", "s": 1, "wd": 4},
+            "2027-05-24": {"t": "s", "s": 1, "wd": 0},
+            "2027-05-25": {"t": "s", "s": 1, "wd": 1},
+            "2027-05-26": {"t": "s", "s": 1, "wd": 2},
+            "2027-05-27": {"t": "s", "s": 1, "wd": 3},
+            "2027-05-28": {"t": "s", "s": 1, "wd": 4},
+            "2027-05-31": {"t": "s", "s": 2, "wd": 0},
+            "2027-06-01": {"t": "s", "s": 2, "wd": 1},
+            "2027-06-02": {"t": "s", "s": 2, "wd": 2},
+            "2027-06-03": {"t": "s", "s": 2, "wd": 3},
+            "2027-06-04": {"t": "s", "s": 2, "wd": 4},
+            "2027-06-07": {"t": "s", "s": 2, "wd": 0},
+            "2027-06-08": {"t": "s", "s": 2, "wd": 1},
+            "2027-06-09": {"t": "s", "s": 2, "wd": 2},
+            "2027-06-10": {"t": "s", "s": 2, "wd": 3},
+            "2027-06-11": {"t": "s", "s": 2, "wd": 4}
+        },
+        "T": {
+            "1": ["07:30", "08:15", "08:20", "09:05", "09:25", "10:10", "10:15", "11:00", "11:05", "11:50"],
+            "2": ["13:30", "14:15", "14:20", "15:05", "15:25", "16:10", "16:15", "17:00", "17:05", "17:50"]
+        },
+        "TT": {
+            "0": ["Математика", "Сербский язык", "Английский язык", "Цифровой мир", "Секция (кружок)"],
+            "1": ["Сербский язык", "Математика", "Физкультура", "Окружающий мир", "Дополнительные занятия"],
+            "2": ["Математика", "Сербский язык", "Изобразительное искусство", "Изобразительное искусство", "Классный час"],
+            "3": ["Физкультура", "Математика", "Сербский язык", "Религия (Верска настава)", "Английский язык"],
+            "4": ["Математика", "Сербский язык", "Физкультура", "Окружающий мир", "Музыка"]
+        },
+        "ranges": [["2026-12-31", "2027-01-17", "Зимние каникулы"], ["2027-02-15", "2027-02-21", "Сретенье и зимние каникулы"], ["2027-04-30", "2027-05-04", "Пасха и Праздник труда"], ["2026-11-11", "2026-11-13", "Праздник и нерабочие дни"], ["2027-06-12", "2027-08-31", "Летние каникулы"]],
+        "notes": {
+            "2026-09-01": "Начало учебного года",
+            "2026-10-21": "День памяти жертв ВОВ — рабочий день",
+            "2026-12-30": "Последний день 1-го полугодия",
+            "2027-01-18": "Начало 2-го полугодия",
+            "2027-01-27": "Свети Сава — праздник в школе, уроков нет",
+            "2027-06-11": "Последний день учёбы",
+            "2026-10-31": "Пресек — промежуточные оценки",
+            "2027-04-03": "Пресек — промежуточные оценки",
+            "2026-11-10": "Вторник, но уроки по расписанию пятницы",
+            "2027-05-17": "С 17.05 по 11.06 — дни посещения EXPO 2027"
+        }
+    };
+
+    const SR = {
+        "Математика": "Математика",
+        "Сербский язык": "Српски језик",
+        "Английский язык": "Енглески језик",
+        "Цифровой мир": "Дигитални свет",
+        "Секция (кружок)": "Секција",
+        "Физкультура": "Физичко и здравствено васпитање",
+        "Окружающий мир": "Свет око нас",
+        "Дополнительные занятия": "Допунска настава",
+        "Изобразительное искусство": "Ликовна култура",
+        "Классный час": "Час одељенског старешине",
+        "Религия (Верска настава)": "Верска настава",
+        "Музыка": "Музичка култура",
+        "День перемирия (гос. праздник)": "Дан примирја (државни празник)",
+        "Нерабочий день": "Ненаставни дан",
+        "Свети Сава — школьный праздник, уроков нет": "Свети Сава — школска слава, нема наставе",
+        "Сретенье (гос. праздник)": "Сретење (државни празник)",
+        "Зимние каникулы (2-я часть)": "Зимски распуст (други део)",
+        "Великая пятница (Пасха)": "Велики петак",
+        "Пасхальный понедельник": "Ускршњи понедељак",
+        "Праздник труда (нерабочий день)": "Празник рада (нерадни дан)",
+        "Зимние каникулы": "Зимски распуст",
+        "Уроки по расписанию ПЯТНИЦЫ": "Настава по распореду за ПЕТАК",
+        "Сретенье и зимние каникулы": "Сретење и зимски распуст",
+        "Пасха и Праздник труда": "Ускрс и Празник рада",
+        "Праздник и нерабочие дни": "Празник и ненаставни дани",
+        "Летние каникулы": "Летњи распуст",
+        "Начало учебного года": "Почетак школске године",
+        "День памяти жертв ВОВ — рабочий день": "Дан сећања на српске жртве у Другом светском рату — ради се",
+        "Последний день 1-го полугодия": "Крај првог полугодишта",
+        "Начало 2-го полугодия": "Почетак другог полугодишта",
+        "Свети Сава — праздник в школе, уроков нет": "Свети Сава — школска слава, нема наставе",
+        "Последний день учёбы": "Последњи дан наставе",
+        "Пресек — промежуточные оценки": "Пресек — оцене на класификационом периоду",
+        "Вторник, но уроки по расписанию пятницы": "Уторак, али настава по распореду за петак",
+        "С 17.05 по 11.06 — дни посещения EXPO 2027": "Од 17.05. до 11.06. — посете изложби EXPO 2027"
+    };
+    const UI = {
+        ru: {
+            today: "Сегодня",
+            lg1: "1 смена (утро)",
+            lg2: "2 смена (после обеда)",
+            lg3: "каникулы / праздник",
+            lg4: "выходной",
+            foot: "ОШ «Олга Милошевић», II-1, 2026/2027. Большая перемена — после 2-го урока.",
+            loc: "ru-RU",
+            todayMark: " · сегодня",
+            sh: s => s === 1 ? "☀️ 1 смена" : "🌙 2 смена",
+            sub: (a, b) => `5 уроков · с ${a} до ${b}`,
+            brk: "большая перемена · 20 минут",
+            none: "🎉 Уроков нет",
+            we: "😴 Выходной",
+            weS: "Суббота или воскресенье",
+            out: "Уроков нет",
+            outS: "Вне учебного года",
+            next: (d, s) => `Ближайший учебный день: <b>${d}</b>, ${s} смена.`,
+            mon: ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"],
+            wd: ["пн", "вт", "ср", "чт", "пт", "сб", "вс"],
+            title: "Школьный день 2/1"
+        },
+        sr: {
+            today: "Данас",
+            lg1: "I смена (преподне)",
+            lg2: "II смена (поподне)",
+            lg3: "распуст / празник",
+            lg4: "викенд",
+            foot: "ОШ „Олга Милошевић“, II-1, 2026/2027. Велики одмор — после 2. часа.",
+            loc: "sr-Cyrl-RS",
+            todayMark: " · данас",
+            sh: s => s === 1 ? "☀️ I смена" : "🌙 II смена",
+            sub: (a, b) => `5 часова · од ${a} до ${b}`,
+            brk: "велики одмор · 20 минута",
+            none: "🎉 Нема наставе",
+            we: "😴 Викенд",
+            weS: "Субота или недеља",
+            out: "Нема наставе",
+            outS: "Ван школске године",
+            next: (d, s) => `Следећи наставни дан: <b>${d}</b>, ${s === 1 ? "I" : "II"} смена.`,
+            mon: ["јануар", "фебруар", "март", "април", "мај", "јун", "јул", "август", "септембар", "октобар", "новембар", "децембар"],
+            wd: ["пон", "уто", "сре", "чет", "пет", "суб", "нед"],
+            title: "Школски дан II-1"
+        }
+    };
+    let lang = "ru";
+    try {
+        lang = localStorage.getItem("lang") || "ru"
+    } catch (e) {
+    }
+    const U = () => UI[lang], tr = s => lang === "sr" ? (SR[s] || s) : s;
+
+    function setLang(l) {
+        lang = l;
+        try {
+            localStorage.setItem("lang", l)
+        } catch (e) {
+        }
+        document.documentElement.lang = l;
+        document.title = U().title;
+        document.querySelectorAll("[data-i]").forEach(el => el.textContent = U()[el.dataset.i]);
+        lru.setAttribute("aria-pressed", l === "ru");
+        lsr.setAttribute("aria-pressed", l === "sr");
+        render()
+    }
+
+    lru.onclick = () => setLang("ru");
+    lsr.onclick = () => setLang("sr");
+
+    const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    const parse = s => {
+        const [a, b, c] = s.split("-").map(Number);
+        return new Date(a, b - 1, c)
+    };
+    const bgNow = () => {
+        const p = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "Europe/Belgrade",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        }).formatToParts(new Date());
+        const g = t => p.find(x => x.type === t).value;
+        return {date: `${g("year")}-${g("month")}-${g("day")}`, min: (+g("hour") % 24) * 60 + +g("minute")}
+    };
+    let cur = bgNow().date, month = cur.slice(0, 7);
+
+    function info(k) {
+        const e = DATA.days[k];
+        if (e) return e;
+        const r = DATA.ranges.find(([a, b]) => k >= a && k <= b);
+        if (r) return {t: "off", n: r[2]};
+        const wd = parse(k).getDay();
+        if (wd === 0 || wd === 6) return {t: "we"};
+        return {t: "none"};
+    }
+
+    function render() {
+        const e = info(cur), d = parse(cur), now = bgNow();
+        document.getElementById("pick").value = cur;
+        document.getElementById("dateLbl").textContent = d.toLocaleDateString(U().loc, {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }) + (cur === now.date ? U().todayMark : "");
+        const hero = document.getElementById("hero"), L = document.getElementById("lessons");
+        const note = DATA.notes[cur] ? `<div class="note">📌 ${tr(DATA.notes[cur])}</div>` : "";
+        L.innerHTML = "";
+        let st = document.documentElement.style;
+        if (e.t === "s") {
+            const t = DATA.T[e.s], ls = DATA.TT[e.wd];
+            hero.style.cssText = `--hc:var(--s${e.s});--hb:var(--s${e.s}b)`;
+            L.style.cssText = hero.style.cssText;
+            hero.innerHTML = `<div class="big">${U().sh(e.s)}</div><div class="sub">${U().sub(t[0], t[9])}</div>${e.n ? `<div class="note">⚠️ ${tr(e.n)}</div>` : ""}${note}`;
+            const m = s => {
+                const [h, mm] = s.split(":");
+                return h * 60 + +mm
+            };
+            ls.forEach((n, i) => {
+                let cls = "ls";
+                if (cur === now.date) {
+                    if (now.min >= m(t[2 * i]) && now.min < m(t[2 * i + 1])) cls += " now"; else if (now.min >= m(t[2 * i + 1])) cls += " done";
+                }
+                L.insertAdjacentHTML("beforeend", `<div class="${cls}"><b>${i + 1}</b><span class="tm">${t[2 * i]}–${t[2 * i + 1]}</span><span class="nm">${tr(n)}</span></div>`);
+                if (i === 1) L.insertAdjacentHTML("beforeend", `<div class="brk">${U().brk}</div>`);
+            });
+        } else {
+            const map = {
+                off: ["var(--off)", "var(--offb)", U().none, tr(e.n || "")],
+                we: ["var(--mute)", "var(--we)", U().we, U().weS],
+                none: ["var(--mute)", "var(--we)", U().out, U().outS]
+            }[e.t];
+            hero.style.cssText = `--hc:${map[0]};--hb:${map[1]}`;
+            hero.innerHTML = `<div class="big">${map[2]}</div><div class="sub">${map[3]}</div>${note}`;
+            if (e.t !== "s") { // next school day
+                let x = parse(cur);
+                for (let i = 0; i < 120; i++) {
+                    x.setDate(x.getDate() + 1);
+                    const k = iso(x), f = DATA.days[k];
+                    if (f && f.t === "s") {
+                        L.innerHTML = `<p class="date" style="text-transform:none">${U().next(x.toLocaleDateString(U().loc, {
+                            weekday: "long",
+                            day: "numeric",
+                            month: "long"
+                        }), f.s)}</p>`;
+                        break
+                    }
+                }
+            }
+        }
+        drawCal();
+    }
+
+    function drawCal() {
+        const [y, m] = month.split("-").map(Number), C = document.getElementById("cal"), today = bgNow().date;
+        document.getElementById("mt").textContent = U().mon[m - 1] + " " + y;
+        C.innerHTML = U().wd.map(x => `<div class="h">${x}</div>`).join("");
+        const first = new Date(y, m - 1, 1), off = (first.getDay() + 6) % 7;
+        for (let i = 0; i < off; i++) C.insertAdjacentHTML("beforeend", "<div style='cursor:default'></div>");
+        const n = new Date(y, m, 0).getDate();
+        for (let i = 1; i <= n; i++) {
+            const k = `${y}-${String(m).padStart(2, "0")}-${String(i).padStart(2, "0")}`, e = info(k);
+            const c = e.t === "s" ? "c" + e.s : e.t === "off" ? "co" : "cw";
+            C.insertAdjacentHTML("beforeend", `<div class="${c}${k === cur ? " sel" : ""}${k === today ? " tod" : ""}" data-k="${k}" title="${tr(e.n || "")}">${i}</div>`)
+        }
+    }
+
+    function go(k) {
+        cur = k;
+        month = k.slice(0, 7);
+        render()
+    }
+
+    const step = n => {
+        const d = parse(cur);
+        d.setDate(d.getDate() + n);
+        go(iso(d))
+    };
+    prev.onclick = () => step(-1);
+    next.onclick = () => step(1);
+    today.onclick = () => go(bgNow().date);
+    pick.onchange = e => e.target.value && go(e.target.value);
+    cal.onclick = e => {
+        const k = e.target.dataset.k;
+        if (k) go(k)
+    };
+    const mv = n => {
+        let [y, m] = month.split("-").map(Number);
+        m += n;
+        if (m < 1) {
+            m = 12;
+            y--
+        }
+        if (m > 12) {
+            m = 1;
+            y++
+        }
+        month = `${y}-${String(m).padStart(2, "0")}`;
+        drawCal()
+    };
+    mp.onclick = () => mv(-1);
+    mn.onclick = () => mv(1);
+    setLang(lang);
+    setInterval(() => {
+        if (cur === bgNow().date) render()
+    }, 60000);
+</script>
+
+</body>
+</html>
