@@ -1,2 +1,0 @@
-# SchoolSchedule
-School schedule
