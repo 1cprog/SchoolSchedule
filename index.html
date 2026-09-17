@@ -22,13 +22,17 @@
             --ink: #1C2440;
             --mute: #646C88;
             --line: #DDE2EE;
+            --c2b: #3A3570;
+            --c2t: #CFC9FF;
             --s1: #E59A1F;
             --s1b: #FFF1D9;
             --s2: #5B4FCF;
             --s2b: #ECEAFF;
             --off: #23946A;
             --offb: #DEF5EC;
-            --we: #EEF0F6
+            --we: #EEF0F6;
+            --web: #33222C;
+            --wet: #D9A1AC;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -221,8 +225,8 @@
         }
 
         .c2 {
-            background: var(--s2b);
-            color: var(--s2)
+            background: var(--c2b);
+            color: var(--c2t)
         }
 
         .co {
@@ -231,8 +235,8 @@
         }
 
         .cw {
-            background: var(--we);
-            color: var(--mute)
+            background: var(--web);
+            color: var(--wet);
         }
 
         .cal .sel {
@@ -336,12 +340,13 @@
         </div>
         <div class="cal" id="cal"></div>
         <div class="legend" style="margin-top:10px">
-          <span style="--c:var(--s1)" data-i="lg1">1 смена (утро)</span>
-          <span style="--c:var(--s2)" data-i="lg2">2 смена (после обеда)</span><span style="--c:var(--off)" data-i="lg3">каникулы / праздник</span>
-          <span style="--c:var(--mute)" data-i="lg4">выходной</span>
+            <span style="--c:var(--s1)" data-i="lg1">1 смена (утро)</span>
+            <span style="--c:var(--s2)" data-i="lg2">2 смена (после обеда)</span>
+            <span style="--c:var(--off)" data-i="lg3">каникулы / праздник</span>
+            <span style="--c:var(--wet)" data-i="lg4">выходной</span>
         </div>
     </section>
-    <p class="date" style="text-transform:none" data-i="foot">ОШ «Олга Милошевић», 2/1 (II-1), 2026/2027. Большая перемена — после 2-го урока. Дни открытых дверей: четверг, 4-й урок.</p>
+    <p class="date" style="text-transform:none" data-i="foot">ОШ «Олга Милошевић», 2/1 (II-1), 2026/2027. Большая перемена — после 2-го урока.</p>
 </div>
 <script>
     const DATA = {
